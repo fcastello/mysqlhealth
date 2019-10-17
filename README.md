@@ -17,6 +17,25 @@ This healthcheck is intended for those who need an http endpoint to check the st
 go build
 ```
 
+# How to use
+```bash
+export  MYSQL_SOURCE_NAME='user:password@tcp(IP:PORT)/DATABASE' # Leave database empty if you just want to use the mysql local database to check the overall availability of the server
+mysqlhealth -help
+./mysqlhealth 0.1 Exposes an http health endpoint for mysql health checks.
+It uses MYSQL_SOURCE_NAME for mysql connection environment variable with following format: https://github.com/go-sql-driver/mysql#dsn-data-source-name
+Default value is "mysql:mysql@tcp(localhost:3306)/".
+
+Usage: ./mysqlhealth [flags]
+
+Flags:
+  -version
+        Print version information and exit.
+  -web.health-path string
+        Path under which to expose health endpoint (default "/health")
+  -web.listen-address string
+        Address to listen on for web interface (default ":42005")
+```
+
 # Disclaimer
 This software has been built on my free time and it shouldn't be considered as production ready.  
 The software doesn't take care of any security best practices as it uses plain text HTTP and doesn't implement any form of authentication or rate limiting.  
@@ -25,6 +44,8 @@ USE AR YOUR OWN RISK!
 # TODO
 
 - Add Documentation to README
-- Add makefile
+- Add Makefile
+- Add version builds to github to be downloadable
 - Add Dockerfile
+- use golang docker container for building to prevent the need of having golang installed
 - Add tests (it so simple that probably doesn't need one)

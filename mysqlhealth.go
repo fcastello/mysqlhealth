@@ -78,7 +78,7 @@ var (
 
 func main() {
 	flag.Usage = func() {
-		fmt.Fprintf(os.Stderr, "%s %s exports various ProxySQL metrics in Prometheus format.\n", os.Args[0], version)
+		fmt.Fprintf(os.Stderr, "%s %s Exposes an http health endpoint for mysql health checks.\n", os.Args[0], version)
 		fmt.Fprintf(os.Stderr, "It uses MYSQL_SOURCE_NAME for mysql connection environment variable with following format: https://github.com/go-sql-driver/mysql#dsn-data-source-name\n")
 		fmt.Fprintf(os.Stderr, "Default value is %q.\n\n", defaultDataSource)
 		fmt.Fprintf(os.Stderr, "Usage: %s [flags]\n\n", os.Args[0])
