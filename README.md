@@ -44,6 +44,7 @@ USE AR YOUR OWN RISK!
 
 # TODO
 
+- Add a way to configure timeouts
 - Add Dockerfile
 - use golang docker container for building to prevent the need of having golang installed
 - Add tests (it so simple that probably doesn't need one)

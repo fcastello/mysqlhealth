@@ -31,25 +31,24 @@ func (app *App) SetupRouter(healthEndpoint string) {
 //getHealth handler function for the /health endpoint
 func (app *App) getHealth(w http.ResponseWriter, r *http.Request) {
 	connectionString := fmt.Sprintf("%s?charset=utf8mb4&collation=utf8mb4_unicode_ci&parseTime=true&multiStatements=true", app.Database)
-
-	db, err := sql.Open("mysql", connectionString)
-	// we hsouldn't have more than 1 connection at a time for healthchecking
-	db.SetMaxOpenConns(1)
-	db.SetMaxIdleConns(0)
-	// Set max lifetime for a connection.
-	db.SetConnMaxLifetime(1 * time.Minute)
-	defer db.Close()
 	status := http.StatusServiceUnavailable
 	text := []byte("")
+	db, err := sql.Open("mysql", connectionString)
+	defer db.Close()
 	if err != nil {
 		text = []byte("Failed to connect to mysql\n")
 	} else {
+		// we hsouldn't have more than 1 connection at a time for healthchecking
+		db.SetMaxOpenConns(1)
+		db.SetMaxIdleConns(0)
+		// Set max lifetime for a connection.
+		db.SetConnMaxLifetime(1 * time.Minute)
+
 		errPing := db.Ping()
 		if errPing != nil {
 			text = []byte("Failed to ping mysql\n")
 		} else {
-			rows, err := db.Query("SELECT 1;")
-			defer rows.Close()
+			_, err := db.Query("SELECT 1;")
 			if err != nil {
 				text = []byte("Failed to ping mysql\n")
 			} else {
@@ -58,15 +57,14 @@ func (app *App) getHealth(w http.ResponseWriter, r *http.Request) {
 			}
 
 		}
-		w.WriteHeader(status)
-		w.Write(text)
 	}
-
+	w.WriteHeader(status)
+	w.Write(text)
 }
 
 const (
 	program           = "mysqlhealth"
-	version           = "0.1"
+	version           = "0.0.2"
 	defaultDataSource = "mysql:mysql@tcp(localhost:3306)/"
 )
 
