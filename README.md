@@ -47,3 +47,4 @@ USE AR YOUR OWN RISK!
 - Add Dockerfile
 - use golang docker container for building to prevent the need of having golang installed
 - Add tests (it so simple that probably doesn't need one)
+- Add automated release to github

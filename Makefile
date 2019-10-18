@@ -18,7 +18,7 @@ pkg-linux: build-linux
 	cp README.md tmp/mysqlhealth
 	cp LICENSE tmp/mysqlhealth
 	cp mysqlhealth tmp/mysqlhealth
-	cd tmp && COPYFILE_DISABLE=1 tar zcvf mysqlhealth_$(VERSION)_amd64.tar.gz mysqlhealth && mv mysqlhealth_$(VERSION)_amd64.tar.gz ../ && cd ..
+	cd tmp && COPYFILE_DISABLE=1 tar zcvf mysqlhealth_v$(VERSION)_amd64.tar.gz mysqlhealth && mv mysqlhealth_v$(VERSION)_amd64.tar.gz ../ && cd ..
 	rm -rf tmp
 
 pkg-darwin: build-darwin
@@ -26,7 +26,7 @@ pkg-darwin: build-darwin
 	cp README.md tmp/mysqlhealth
 	cp LICENSE tmp/mysqlhealth
 	cp mysqlhealth tmp/mysqlhealth
-	cd tmp && COPYFILE_DISABLE=1 tar zcvf mysqlhealth_$(VERSION)_darwin_amd64.tar.gz mysqlhealth && mv mysqlhealth_$(VERSION)_darwin_amd64.tar.gz ../ && cd ..
+	cd tmp && COPYFILE_DISABLE=1 tar zcvf mysqlhealth_v$(VERSION)_darwin_amd64.tar.gz mysqlhealth && mv mysqlhealth_v$(VERSION)_darwin_amd64.tar.gz ../ && cd ..
 	rm -rf tmp
 
 release: pkg-linux pkg-darwin
