@@ -9,6 +9,7 @@ This healthcheck is intended for those who need an http endpoint to check the st
 - GO 1.12 (Tested with)
 - Gorila Mux (github.com/gorilla/mux)
 - GO sql driver (github.com/go-sql-driver/mysql)
+- Automake (if you need to use the Makefile for building the binaries)
 
 # Build
 
@@ -43,9 +44,6 @@ USE AR YOUR OWN RISK!
 
 # TODO
 
-- Add Documentation to README
-- Add Makefile
-- Add version builds to github to be downloadable
 - Add Dockerfile
 - use golang docker container for building to prevent the need of having golang installed
 - Add tests (it so simple that probably doesn't need one)
