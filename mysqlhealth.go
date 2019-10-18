@@ -34,7 +34,6 @@ func (app *App) getHealth(w http.ResponseWriter, r *http.Request) {
 	status := http.StatusServiceUnavailable
 	text := []byte("")
 	db, err := sql.Open("mysql", connectionString)
-	defer db.Close()
 	if err != nil {
 		text = []byte("Failed to connect to mysql\n")
 	} else {
@@ -48,9 +47,9 @@ func (app *App) getHealth(w http.ResponseWriter, r *http.Request) {
 		if errPing != nil {
 			text = []byte("Failed to ping mysql\n")
 		} else {
-			_, err := db.Query("SELECT 1;")
+			_, err := db.Exec("SELECT 1;")
 			if err != nil {
-				text = []byte("Failed to ping mysql\n")
+				text = []byte("Failed to query mysql\n")
 			} else {
 				status = http.StatusOK
 				text = []byte("OK\n")
@@ -60,11 +59,12 @@ func (app *App) getHealth(w http.ResponseWriter, r *http.Request) {
 	}
 	w.WriteHeader(status)
 	w.Write(text)
+	db.Close()
 }
 
 const (
 	program           = "mysqlhealth"
-	version           = "0.0.2"
+	version           = "0.0.3"
 	defaultDataSource = "mysql:mysql@tcp(localhost:3306)/"
 )
 
