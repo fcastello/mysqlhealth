@@ -64,7 +64,7 @@ func (app *App) getHealth(w http.ResponseWriter, r *http.Request) {
 
 const (
 	program           = "mysqlhealth"
-	version           = "0.0.3"
+	version           = "0.0.4"
 	defaultDataSource = "mysql:mysql@tcp(localhost:3306)/"
 )
 
