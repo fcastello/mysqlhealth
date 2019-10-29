@@ -23,7 +23,7 @@ type App struct {
 //SetupRouter Sets up gorilla mux router endpoints
 func (app *App) SetupRouter(healthEndpoint string) {
 	app.Router.
-		Methods("GET").
+		Methods("GET", "HEAD").
 		Path(healthEndpoint).
 		HandlerFunc(app.getHealth)
 }
